@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: server_ingress
+  namespace: devops
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: szukai.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sky-web-svc
+            port:
+              number: 80
+  - host: pgadmin.szukai.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: pgadmin-svc
+            port:
+              number: 80
+  - host: jenkins.szukai.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jenkins-svc
+            port:
+              number: 8080
