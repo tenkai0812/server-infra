@@ -4,8 +4,17 @@ metadata:
   name: server-ingress
   namespace: devops
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/ingress.class: nginx
 spec:
+ingressClassName: nginx
+tls:
+  - hosts:
+      - szukai.com
+      - pgadmin.szukai.com
+      - jenkins.szukai.com
+    secretName: szukai-com-tls
   rules:
   - host: szukai.com
     http:
