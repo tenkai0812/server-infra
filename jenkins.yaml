@@ -4,8 +4,6 @@ metadata:
   name: jenkins
   namespace: devops
 spec:
-  serviceAccountName: jenkins-admin
-
   serviceName: "jenkins"
   replicas: 1
   selector:
@@ -16,6 +14,7 @@ spec:
       labels:
         app: jenkins
     spec:
+      serviceAccountName: jenkins-admin
       # 這是為了解決 Jenkins 權限問題 (UID 1000)
       securityContext:
         fsGroup: 1000 
