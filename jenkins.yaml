@@ -4,6 +4,8 @@ metadata:
   name: jenkins
   namespace: devops
 spec:
+  serviceAccountName: jenkins-admin
+
   serviceName: "jenkins"
   replicas: 1
   selector:
