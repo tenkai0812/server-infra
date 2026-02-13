@@ -20,8 +20,14 @@ spec:
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts
+        env:
+        - name: JAVA_OPTS
+          value: "-Duser.timezone=Asia/Taipei"
+        - name: TZ
+          value: "Asia/Taipei"
         ports:
         - containerPort: 8080
+        - containerPort: 50000
         volumeMounts:
         - name: jenkins-home
           mountPath: /var/jenkins_home
@@ -44,5 +50,9 @@ spec:
   selector:
     app: jenkins
   ports:
-  - port: 8080
+  - name: http
+    port: 8080
     targetPort: 8080
+  - name: agent
+    port: 50000
+    targetPort: 50000
